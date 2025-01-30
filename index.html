@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oğuzhan Cantekin - Kişisel Blog</title>
+    <!-- Google Fonts ve CSS Dosyası -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Oğuzhan Cantekin</h1>
+        </div>
+    </header>
+    <nav>
+        <a href="index1.html">Oyun</a> 
+        <a href="aboutme.html">Hakkımda</a> <!-- Hakkımda Sayfasına Link -->
+        <a href="projects.html">Projeler</a> <!-- Projeler Sayfasına Link -->
+        <a href="contact.html">İletişim</a> <!-- İletişim Sayfasına Link -->
+    </nav>
+    <main>
+        <section id="game-container">
+            <h2>İsim Tahmin Oyunu</h2>
+            <div class="game-info">
+                <p><strong>Oyun Kuralları:</strong></p>
+                <ul>
+                    <li><span class="legend correct">gre</span>: Harf doğru ve doğru konumda.</li>
+                    <li><span class="legend present">yel</span>: Harf doğru ancak yanlış konumda.</li>
+                    <li><span class="legend absent">GRA</span>: Harf isimde bulunmuyor.</li>
+                </ul>
+                <p><strong>Tahmin Hakkı:</strong> Toplamda 5 tahmin hakkınız bulunmaktadır. Başarılar!</p>
+            </div>
+            
+            <div id="word-length"></div>
+            <div id="game"></div>
+            <div class="input-container">
+                <input type="text" id="guess" maxlength="5" placeholder="Tahmininizi girin">
+                <button onclick="submitGuess()">Tahmin Et</button>
+                <button onclick="resetGame()">Yeni İsim</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 Oğuzhan Cantekin. Tüm hakları saklıdır.</p>
+    </footer>
+    <script>
+        const names = {
+            4: ["Acun", "Adem", "Adil", "Arda", "Bora", "Emin", "Emre", "Kaan", "Ozan", "Tuba","Acun", "Adem", "Adil", "Agah", "Arda", 
+            "Baha", "Batu", "Bora", "Deha", "Edip", "Edis", "Enes", "Ediz", "Emin", "Emre", "Eray", 
+    "Faik", "Fuat", "Gani", "Gazi", "Kaan", "Kaya", "Mert", "Naci", "Nail", "Nuri", "Oben", "Ogün", "Oğuz", "Okan", "Okay", "Ozan", "Öcal", 
+    "Önal", "Öner", "Pars", "Paşa", "Raif", "Rami", "Rauf", "Reha", "Rıza", "Sadi", "Safa", "Suat", "Sarp", "Şadi", "Ufuk", "Uğur", "Ulaş", 
+    "Umut", "Uras", "Uluç", "Ünal", "Üner", "Vefa", "Veli", "Zeki", "Ziya","Alev", "Alya", "Asel", "Aslı", "Ayça", "Azra", "Bade", "Banu", 
+    "Çise", "Dila", "Döne", "Ebru", "Ecem", "Ekin", "Elif", "Emel", "Esra", "Hale", "Huri", "Jale", "Lale", "Lara", "Luna", "Maya", "Mina", 
+    "Mine", "Müge", "Nida", "Seda", "Sema", "Sena", "Sara", "Saba", "Şule", "Tuba", "Ülkü", "Umay"],
+
+            5: ["Ahmet", "Murat", "Yusuf", "Fatih", "Nazlı", "Kerem", "Melis", "Bahar", "Selin", "Zehra","Ahmet", "Burak", "Murat", 
+            "Yusuf", "Umeyr", "Ömer", "Fatih", "Nazlı", "Erman", "Hakan", "Samet", "Deniz", 
+             "Alper", "Hasan", "Elçin", "Tolga", "Erdem", "Salih", "Melih", "Kerem", "Osman",  "Emrah", "Harun",
+            "Semih", "Kemal", "Hamza", "Yunus", "Kadir", "Orhan", "Melis", "Melek", "Aylin", "Bahar", "Ceren",  "Selin", "Zehra", 
+            "Rabia", "Cansu", "Merve", "Sinem",  "Buket", "Hande", "Helin", "Pelin", "Sinem",  "Gamze",  "Önder", "Asude"]
+        };
+
+        let targetWord;
+        let guessesRemaining;
+
+        function initializeGame() {
+            const length = Math.random() > 0.5 ? 4 : 5;
+            const wordList = names[length];
+            targetWord = wordList[Math.floor(Math.random() * wordList.length)].toLowerCase();
+            guessesRemaining = 5;
+            document.getElementById("game").innerHTML = "";
+            document.getElementById("guess").value = "";
+            document.getElementById("word-length").textContent = `Aradığımız isim ${length} harfli, Türkçe bir isim`;
+        }
+
+        function submitGuess() {
+            const guessInput = document.getElementById("guess").value.toLowerCase();
+            if (guessInput.length !== targetWord.length) {
+                alert(`Lütfen ${targetWord.length} harfli bir isim girin.`);
+                return;
+            }
+
+            if (guessesRemaining <= 0) {
+                alert("Tahmin hakkınız kalmadı. Yeni bir oyun başlatın.");
+                return;
+            }
+
+            guessesRemaining--;
+            const gameDiv = document.getElementById("game");
+            const guessDiv = document.createElement("div");
+            guessDiv.className = "guess";
+
+            const letterCount = {};
+            for (let letter of targetWord) {
+                letterCount[letter] = (letterCount[letter] || 0) + 1;
+            }
+
+            const result = [];
+            for (let i = 0; i < guessInput.length; i++) {
+                const letter = guessInput[i];
+                const letterDiv = document.createElement("div");
+                letterDiv.className = "letter";
+                letterDiv.textContent = letter.toLocaleUpperCase("tr-TR");
+
+                if (letter === targetWord[i]) {
+                    letterDiv.classList.add("correct");
+                    result.push("correct");
+                    letterCount[letter]--;
+                } else {
+                    result.push(null);
+                }
+
+                guessDiv.appendChild(letterDiv);
+            }
+
+            for (let i = 0; i < guessInput.length; i++) {
+                const letter = guessInput[i];
+                const letterDiv = guessDiv.children[i];
+
+                if (!result[i]) {
+                    if (letterCount[letter] > 0) {
+                        letterDiv.classList.add("present");
+                        letterCount[letter]--;
+                    } else {
+                        letterDiv.classList.add("absent");
+                    }
+                }
+            }
+
+            gameDiv.appendChild(guessDiv);
+
+            if (guessInput === targetWord) {
+                alert("Tebrikler, doğru tahmin ettiniz!");
+                guessesRemaining = 0;
+            } else if (guessesRemaining === 0) {
+                alert(`Tahmin hakkınız bitti. Doğru kelime: ${targetWord}`);
+            }
+
+            document.getElementById("guess").value = '';
+        }
+
+        function resetGame() {
+            initializeGame();
+        }
+
+        initializeGame();
+    </script>
+</body>
+</html>
