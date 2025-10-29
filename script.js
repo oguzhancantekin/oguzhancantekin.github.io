@@ -152,6 +152,23 @@ function resetGame() {
 }
 
 // Sayfa ilk yüklendiğinde varsayılan zorlukla (Orta - 5 Harf) oyunu başlat
+// ve "Enter" tuşunu dinle
 document.addEventListener('DOMContentLoaded', () => {
-    initializeGame(5);
+    initializeGame(5);
+
+    if (guessInput) {
+        guessInput.addEventListener('keydown', function(event) {
+            // Eğer basılan tuş 'Enter' ise
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Varsayılan davranışı (örn: form gönderme) engelle
+                
+                // Eğer input kilitli değilse (oyun devam ediyorsa)
+                if (!guessInput.disabled) {
+                    submitGuess(); // Normal 'Tahmin Et' butonuna basılmış gibi yap
+                }
+            }
+        });
+    } else {
+        console.error("Hata: 'guessInput' elementi bulunamadı.");
+    }
 });
