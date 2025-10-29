@@ -7,38 +7,51 @@ const gameDiv = document.getElementById("game");
 
 // Backend API'ından belirli bir uzunlukta kelime getiren fonksiyon
 async function fetchNewWord(length) {
-    try {
-        // Backend'e hangi uzunlukta kelime istediğimizi parametre olarak gönderiyoruz
-            const response = await fetch(`https://oguzhan-kelime-api.onrender.com/api/get-word?length=${length}`);        if (!response.ok) {
-            throw new Error(`API'dan ${length} harfli kelime alınamadı.`);
-        }
-        const data = await response.json();
-        return data.word;
-    } catch (error) {
-        console.error("Hata:", error);
-        showMessage("Oyun yüklenemedi. Sunucu çalışmıyor olabilir.", 'red');
-        return null;
-    }
+    try {
+        const response = await fetch(`https://oguzhan-kelime-api.onrender.com/api/get-word?length=${length}`);
+        if (!response.ok) {
+            throw new Error(`API'dan ${length} harfli kelime alınamadı.`);
+        }
+        const data = await response.json();
+        return data.word;
+    } catch (error) {
+        console.error("Hata:", error);
+        throw error; // Hatayı yakalayıp bir üst fonksiyona fırlatıyoruz
+    }
 }
 
 // Oyunu başlatan ana fonksiyon
 async function initializeGame(length) {
-    showMessage("Yeni kelime yükleniyor...", "gray");
-    gameDiv.innerHTML = "";
-    guessInput.value = "";
-    guessInput.disabled = true; // Kelime yüklenene kadar input'u kilitle
+    // 1. Gecikme mesajı için bir zamanlayıcı (timer) ayarlayalım
+    let longWaitTimer = setTimeout(() => {
+        showMessage("Sunucu uyanıyor olabilir, lütfen biraz bekleyin...", "orange");
+    }, 4000); // 4 saniye sonra bu mesajı göster
 
-    targetWord = await fetchNewWord(length);
+    // 2. Normal yükleme mesajı
+    showMessage("Yeni kelime yükleniyor...", "gray");
+    gameDiv.innerHTML = "";
+    guessInput.value = "";
+    guessInput.disabled = true; // Butonları ve input'u kilitle
 
-    if (targetWord) {
-        guessesRemaining = 5; // Her seviye için 5 hak
-        guessInput.maxLength = targetWord.length;
-        document.getElementById("word-length").textContent = `Aradığımız isim ${targetWord.length} harfli, Türkçe bir isim`;
-        showMessage("", "black");
-        guessInput.disabled = false; // Kelime yüklendi, input'u aç
-        guessInput.focus(); // İmleci input'a odakla
-    } else {
-         document.getElementById("word-length").textContent = `Bu uzunlukta bir kelime bulunamadı. Lütfen başka bir zorluk seçin.`;
+    try {
+        // 3. Kelimeyi çekmeyi dene
+        targetWord = await fetchNewWord(length);
+
+        // 4. Başarılı olursa:
+        clearTimeout(longWaitTimer); // "Sunucu uyanıyor" zamanlayıcısını iptal et
+        guessesRemaining = 5;
+        guessInput.maxLength = targetWord.length;
+        document.getElementById("word-length").textContent = `Aradığımız isim ${targetWord.length} harfli, Türkçe bir isim`;
+        showMessage("", "black"); // Tüm mesajları temizle
+        guessInput.disabled = false; // Kilidi aç
+        guessInput.focus();
+
+    } catch (error) {
+        // 5. Başarısız olursa (30sn bekledikten sonra):
+        clearTimeout(longWaitTimer); // Zamanlayıcıyı iptal et
+        showMessage("Oyun yüklenemedi. Sunucuya ulaşılamıyor.", 'red');
+        document.getElementById("word-length").textContent = `Lütfen sayfayı yenileyip tekrar deneyin.`;
+        targetWord = null; // Oyunu kilitli tut
     }
 }
 
