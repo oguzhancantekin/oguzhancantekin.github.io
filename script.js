@@ -9,8 +9,7 @@ const gameDiv = document.getElementById("game");
 async function fetchNewWord(length) {
     try {
         // Backend'e hangi uzunlukta kelime istediğimizi parametre olarak gönderiyoruz
-        const response = await fetch(`http://localhost:3000/api/get-word?length=${length}`);
-        if (!response.ok) {
+            const response = await fetch(`https://oguzhan-kelime-api.onrender.com/api/get-word?length=${length}`);        if (!response.ok) {
             throw new Error(`API'dan ${length} harfli kelime alınamadı.`);
         }
         const data = await response.json();
