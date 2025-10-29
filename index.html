@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oğuzhan Cantekin - Kişisel Blog</title>
+    <!-- Google Fonts ve CSS Dosyası bağlantısı-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Oğuzhan Cantekin</h1>
+        </div>
+    </header>
+    <nav>
+        <a href="index.html">Oyun</a> 
+        <a href="aboutme.html">Hakkımda</a> <!-- LİNKS -->
+        <a href="projects.html">Projeler</a> 
+        <a href="contact.html">İletişim</a> 
+    </nav>
+    <main>
+        <section id="game-container">
+            <h2>İsim Tahmin Oyunu</h2>
+            <div class="game-info">
+                <p><strong>Oyun Kuralları:</strong></p>
+                <ul>
+                    <li><span class="legend correct">a</span>: Harf doğru ve doğru konumda.</li>
+                    <li><span class="legend present">a</span>: Harf doğru ancak yanlış konumda.</li>
+                    <li><span class="legend absent">a</span>: Harf isimde bulunmuyor.</li>
+                </ul>
+                <p><strong>Tahmin Hakkı:</strong> Toplamda 5 tahmin hakkınız bulunmaktadır. Başarılar!</p>
+            </div>
+
+            <div id="difficulty-selector">
+    <button class="difficulty-btn" onclick="startGameWithDifficulty(3)">Kolay (3 Harf)</button>
+    <button class="difficulty-btn" onclick="startGameWithDifficulty(4)">Normal (4 Harf)</button>
+    <button class="difficulty-btn active" onclick="startGameWithDifficulty(5)">Orta (5 Harf)</button>
+    <button class="difficulty-btn" onclick="startGameWithDifficulty(6)">Zor (6 Harf)</button>
+    <button class="difficulty-btn" onclick="startGameWithDifficulty(7)">Çok Zor (7 Harf)</button>
+</div>
+
+<div id="word-length"></div>
+            
+            <div id="word-length"></div>
+            <div id="game"></div>
+<p id="game-message" class="game-message"></p> <div class="input-container">
+    <input type="text" id="guess" maxlength="5" placeholder="Tahmininizi girin">
+                <button onclick="submitGuess()">Tahmin Et</button>
+                <button onclick="resetGame()">Yeni İsim</button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>© 2025 Oğuzhan Cantekin. Tüm hakları saklıdır.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
