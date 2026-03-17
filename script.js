@@ -65,10 +65,18 @@ function startGameWithDifficulty(length) {
     initializeGame(length);
 }
 
-// Mesaj gösterme fonksiyonu (değişiklik yok)
+// Mesaj gösterme fonksiyonu
 function showMessage(text, color = 'black') {
     messageElement.textContent = text;
-    messageElement.style.color = color;
+    // Harcoded renkleri modern değişkenlerla eşleyelim
+    const colorMap = {
+        'black': 'var(--text-primary)',
+        'gray': 'var(--text-secondary)',
+        'orange': '#fbbf24',
+        'red': '#f87171',
+        'green': '#34d399'
+    };
+    messageElement.style.color = colorMap[color] || color;
 }
 
 // Tahmin gönderme fonksiyonu (değişiklik yok)
