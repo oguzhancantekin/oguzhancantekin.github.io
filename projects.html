@@ -24,58 +24,141 @@
     <main>
         <section id="projects-container">
             <h2>Projelerim</h2>
-            <p>Bu sayfadaki projeler, yeni teknolojiler keşfettiğim, farklı alanlarda deneyim kazandığım ve kendimi
-                sürekli geliştirmeye çalıştığım öğrenme yolculuğumun adımlarıdır.</p>
+            <p>Aşağıda, hem profesyonel hem de öğrenme süreçlerimde geliştirdiğim projelerimin güncel bir listesi yer
+                almaktadır. Reposu gizli olmayan bu projelerin detaylarına ulaşabilirsiniz.</p>
+
 
             <div class="project">
-                <h3>MicroCommerce API (E-Ticaret Backend Sistemi)</h3>
+                <h3>MicroCommerce API (Kurumsal E-Ticaret Backend)</h3>
                 <p>
-                    <strong>Teknolojiler:</strong> .NET 8, PostgreSQL, JWT, MediatR, FluentValidation, EF Core<br><br>
-                    Kurumsal düzeyde Clean Architecture prensipleri uygulanarak; Domain, Application, Infrastructure ve
-                    WebAPI katmanları ile yüksek test edilebilirliğe sahip bir backend altyapısı geliştirildi.<br><br>
-                    CQRS deseni ile iş mantığı ve veri erişimi ayrıştırıldı; ASP.NET Core Identity ve JWT entegrasyonu
-                    ile güvenli kimlik doğrulama (Bearer Token) ve yetkilendirme mekanizmaları kuruldu.
+                    <strong>Teknolojiler:</strong> .NET 8, C#, PostgreSQL, JWT, MediatR, FluentValidation, Entity
+                    Framework Core<br><br>
+                    Kurumsal düzeyde <b>Clean Architecture</b> prensipleri tam olarak uygulanarak; Domain, Application,
+                    Infrastructure ve WebAPI katmanları ile yüksek test edilebilirliğe sahip, güçlü bir backend
+                    altyapısıdır. <b>CQRS</b> deseni ile iş mantığı ve veri erişimi ayrıştırılmış; ASP.NET Core Identity
+                    ve JWT entegrasyonu ile (Bearer Token) güvenli yetkilendirme inşa edilmiştir.
                 </p>
-                <a href="https://github.com/oguzhancantekin" target="_blank" rel="noopener noreferrer"
-                    class="project-link">GitHub'da İncele</a>
+                <a href="https://github.com/oguzhancantekin/MicroCommerce_Backend" target="_blank"
+                    rel="noopener noreferrer" class="project-link">GitHub'da İncele</a>
             </div>
 
+
+
             <div class="project">
-                <h3>Scan Me! (Mobil Uygulama)</h3>
+                <h3>Scan Me! / Ürün Tarama (Mobil Uygulama)</h3>
                 <p>
                     <strong>Teknolojiler:</strong> Flutter, Dart, SQFlite<br><br>
-                    Kullanıcıların ürün içeriklerini tarayarak kişiselleştirilmiş alerjen tespiti yapmasını sağlayan
-                    mobil uygulama geliştirildi. Çevrimdışı veri yönetimi için SQFlite ile yerel veritabanı mimarisi ve
-                    performans optimizasyonu sağlandı.
+                    Kullanıcıların tüketim ürünlerinin içeriklerini kamera aracılığıyla tarayarak kişiselleştirilmiş
+                    <b>alerjen tespiti</b> yapmasını sağlayan, fayda odaklı mobil uygulama geliştirmesi. İnternet
+                    erişimi olmadan da verimli çalışabilmesi için <b>SQFlite</b> yerel veritabanı mimarisi
+                    kurgulanmıştır.
                 </p>
-                <a href="https://github.com/oguzhancantekin" target="_blank" rel="noopener noreferrer"
+
+            </div>
+
+            <div class="project">
+                <h3>Tedarikçi Yönetim Paneli (Web Uygulaması)</h3>
+                <p>
+                    <strong>Teknolojiler:</strong> C#, ASP.NET MVC, Entity Framework, MSSQL, Bootstrap<br><br>
+                    Uyumsoft stajı kapsamında, tedarikçilerin sisteme giriş yaparak ürün/sipariş yönetimini kolaylıkla
+                    gerçekleştirebildiği web tabanlı yönetim platformudur. <b>MVC</b> mimarisiyle modüler olarak
+                    tasarlanmış olup; rol tabanlı erişim (Admin vb.), CRUD standartları, yetkilendirme (Auth) ve e-posta
+                    ile bildirim gibi entegre modüller içerir.
+                </p>
+                <a href="https://github.com/oguzhancantekin/TedarikciPanel" target="_blank" rel="noopener noreferrer"
+                    class="project-link">GitHub'da İncele</a>
+            </div>
+
+
+
+            <div class="project">
+                <h3>Kişisel Portfolyo Sitesi & API Altyapısı</h3>
+                <p>
+                    <strong>Teknolojiler:</strong> HTML, CSS (Glassmorphism, Dark Theme), JavaScript, Node.js
+                    (kelime-api)<br><br>
+                    Şu an bulunduğunuz portfolyo projesi. Modern tasarım trendleriyle kodlanmış olup, arka planda
+                    (backend) Node.js ile ayrı bir Github deposunda (kelime-api) tutulan bir REST servisine kurulan
+                    asenkron bağlantıyla "Wordle" benzeri bir dinamik oyun oynatır.
+                </p>
+                <a href="https://github.com/oguzhancantekin/kelime-api" target="_blank" rel="noopener noreferrer"
+                    class="project-link">Backend API Repo</a>
+            </div>
+
+            <div class="project">
+                <h3>JellyBuddies (Oyun Geliştirme)</h3>
+                <p>
+                    <strong>Teknolojiler:</strong> Unity, C# (ShaderLab)<br><br>
+                    Görsel ve oynanış (gameplay) olarak tatmin edici, 3D fizik motoru denemeleri, özel zıplama ve obje
+                    etkileşim mekaniklerini kapsayan oyun projesi. Yapay zeka eklentisi ve C# ile betikleme süreçlerinde
+                    tecrübe edinimi sağlamıştır.
+                </p>
+                <a href="https://github.com/oguzhancantekin/JellyBuddies_Game" target="_blank" rel="noopener noreferrer"
                     class="project-link">GitHub'da İncele</a>
             </div>
 
             <div class="project">
-                <h3>Kişisel Portfolyo Sitesi & İsim Tahmin Oyunu (Web Projesi)</h3>
+                <h3>Banka Yönetim Sistemi (Masaüstü Uygulaması)</h3>
                 <p>
-                    <strong>Teknolojiler:</strong> HTML, CSS, JavaScript, Node.js<br><br>
-                    Yazılım geliştirme becerilerini sergileyen interaktif portfolyo sitesi ve backend servisleri
-                    üzerinden veri çeken dinamik bir kelime tahmin oyunu projesidir.
+                    <strong>Teknolojiler:</strong> Java Swing, MySQL, OOP<br><br>
+                    Kullanıcı arayüzüne (GUI) sahip, MySQL veritabanı entegrasyonu ile temel bankacılık (hesap
+                    oluşturma, para yatırma, çekme vb.) işlemlerinin güvenli bir şekilde gerçekleştirilmesine olanak
+                    sağlayan masaüstü uygulaması.
                 </p>
-                <a href="https://github.com/oguzhancantekin/oguzhancantekin.github.io" target="_blank"
-                    rel="noopener noreferrer" class="project-link">Projeyi İncele</a>
+                <a href="https://github.com/oguzhancantekin/Bank-desktop-application-with-Java-Swing-interface"
+                    target="_blank" rel="noopener noreferrer" class="project-link">GitHub'da İncele</a>
             </div>
 
             <div class="project">
-                <h3>Diğer Çalışmalar (Java, Python, C#)</h3>
+                <h3>Password Processor (Veri Yönetimi & Kriptografi)</h3>
                 <p>
-                    Java Swing ile Banka Yönetim Sistemi, Unity ve Python projelerinin yanı sıra; kurumsal düzeyde WPF,
-                    Avalonia ve Electron.js deneyimlerim bulunmaktadır.
+                    <strong>Teknolojiler:</strong> Java, IO, MD5, SHA-1<br><br>
+                    Büyük veri setlerindeki parolaları işleyip kriptografik hash algoritmalarıyla (MD5, SHA vb.)
+                    şifreleyerek baş harflerine göre indeksleyen ve dosyalayan performans odaklı bir algoritmik proje.
                 </p>
-                <a href="https://github.com/oguzhancantekin" target="_blank" rel="noopener noreferrer"
-                    class="project-link">Tüm Projeleri Gör</a>
+                <a href="https://github.com/oguzhancantekin/Code-that-indexes-passwords-and-writes-them-into-folders-according-to-their-first-letters"
+                    target="_blank" rel="noopener noreferrer" class="project-link">GitHub'da İncele</a>
+            </div>
+
+            <div class="project">
+                <h3>Hayvan Dengesi Simülasyonu (Eco-Simulation)</h3>
+                <p>
+                    <strong>Teknolojiler:</strong> Java, OOP<br><br>
+                    Farklı hayvan türlerinin bir alanda av/avcı ilişkisiyle hayatta kalma mücadelesinin simüle edildiği,
+                    nesne yönelimli programlama kavramlarının (Kalıtım, Polimorfizm vb.) etkin bir şekilde kullanıldığı
+                    algoritmik proje.
+                </p>
+                <a href="https://github.com/oguzhancantekin/Balance-of-animals" target="_blank"
+                    rel="noopener noreferrer" class="project-link">GitHub'da İncele</a>
+            </div>
+
+            <div class="project">
+                <h3>Hayatta Kalma Oyunu (Survival Game)</h3>
+                <p>
+                    <strong>Teknolojiler:</strong> Java, OOP<br><br>
+                    Zindan, orman gibi bölgeler içeren ve sınıf yapılarıyla oyun mekaniklerinin (soyutlama, kapsülleme
+                    vb.) başarılı bir şekilde uyarlandığı terminal/metin tabanlı rol yapma (RPG) oyun simülasyonu.
+                </p>
+                <a href="https://github.com/oguzhancantekin/Survival_Game_w-Java" target="_blank"
+                    rel="noopener noreferrer" class="project-link">GitHub'da İncele</a>
+            </div>
+
+            <div class="project">
+                <h3>Py-Gif (Araç / Script)</h3>
+                <p>
+                    <strong>Teknolojiler:</strong> Python<br><br>
+                    Görsel ve video dosyalarınızı hızlı/kolay bir biçimde hareketli GIF eklemelerine çevirmeye, işlemeye
+                    veya birleştirmeye olanak sağlayan, terminal tabanlı etkili bir sistem aracı ve medya işleyici.
+                </p>
+                <a href="https://github.com/oguzhancantekin/Py-Gif" target="_blank" rel="noopener noreferrer"
+                    class="project-link">GitHub'da İncele</a>
             </div>
 
             <div class="project-future">
-                <h3>Projelerin Devamı Gelecektir</h3>
-                <p>Şu an üzerinde çalıştığım projeler var. Tamamlandıklarında burada paylaşacağım!</p>
+                <h3>(Henüz Paylaşmadığım Diğer Projelerim İçin...)</h3>
+                <p>Üzerinde çalıştığım kapalı kaynak (private) işlerimi ve daha pek çok kod pratiğimi görmek için GitHub
+                    ana profilimi ziyaret edebilirsiniz!</p>
+                <a href="https://github.com/oguzhancantekin" target="_blank" rel="noopener noreferrer"
+                    style="margin-top: 10px;" class="project-link">Github Ana Profilim</a>
             </div>
         </section>
     </main>
