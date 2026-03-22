@@ -634,16 +634,17 @@ button:disabled {
     /* Cleaner look */
 }
 
-.social-link img {
+.social-logo {
     width: 36px;
     height: 36px;
-    filter: brightness(0) invert(1) opacity(0.6);
+    color: white;
+    opacity: 0.6;
     transition: all 0.3s;
 }
 
-.social-link:hover img {
+.social-link:hover .social-logo {
     transform: scale(1.15) translateY(-2px);
-    filter: brightness(0) invert(1) opacity(1);
+    opacity: 1;
 }
 
 /* Footer */
