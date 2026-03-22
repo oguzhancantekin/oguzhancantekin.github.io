@@ -5,6 +5,13 @@ const messageElement = document.getElementById("game-message");
 const guessInput = document.getElementById("guess");
 const gameDiv = document.getElementById("game");
 
+// Klavye Yerleşimi (Türkçe)
+const KEYBOARD_LAYOUT = [
+    ["e", "r", "t", "y", "u", "ı", "o", "p", "ğ", "ü"],
+    ["a", "s", "d", "f", "g", "h", "j", "k", "l", "ş", "i"],
+    ["Enter", "z", "c", "v", "b", "n", "m", "ö", "ç", "Bsp"]
+];
+
 // Backend API'ından belirli bir uzunlukta kelime getiren fonksiyon
 async function fetchNewWord(length) {
     try {
@@ -32,6 +39,11 @@ async function initializeGame(length) {
     gameDiv.innerHTML = "";
     guessInput.value = "";
     guessInput.disabled = true; // Butonları ve input'u kilitle
+
+    // Klavyeyi sıfırla
+    document.querySelectorAll('.key').forEach(btn => {
+        btn.classList.remove("absent", "present", "correct");
+    });
 
     try {
         // 3. Kelimeyi çekmeyi dene
@@ -79,6 +91,61 @@ function showMessage(text, color = 'black') {
     messageElement.style.color = colorMap[color] || color;
 }
 
+// Klavyeyi oluşturan fonksiyon
+function createKeyboard() {
+    const keyboardContainer = document.getElementById("keyboard");
+    if (!keyboardContainer) return;
+    keyboardContainer.innerHTML = "";
+
+    KEYBOARD_LAYOUT.forEach(row => {
+        const rowDiv = document.createElement("div");
+        rowDiv.className = "keyboard-row";
+        
+        row.forEach(key => {
+            const btn = document.createElement("button");
+            btn.className = "key";
+            if (key === "Enter" || key === "Bsp") {
+                btn.classList.add("wide");
+            }
+            btn.textContent = key === "Bsp" ? "⌫" : (key === "Enter" ? "Tahmin Et" : key.toLocaleUpperCase("tr-TR"));
+            btn.setAttribute("data-key", key.toLocaleLowerCase("tr-TR"));
+            
+            btn.addEventListener("click", () => handleKeyPress(key));
+            rowDiv.appendChild(btn);
+        });
+        
+        keyboardContainer.appendChild(rowDiv);
+    });
+}
+
+// Klavye tuşuna basıldığında
+function handleKeyPress(key) {
+    if (guessInput.disabled) return;
+    
+    if (key === "Enter") {
+        submitGuess();
+    } else if (key === "Bsp") {
+        guessInput.value = guessInput.value.slice(0, -1);
+    } else {
+        if (guessInput.value.length < guessInput.maxLength) {
+            guessInput.value += key.toLocaleLowerCase("tr-TR");
+        }
+    }
+}
+
+// Klavyedeki harflerin rengini güncelle
+function updateKeyboardColor(letter, status) {
+    const keyBtn = document.querySelector(`.key[data-key="${letter}"]`);
+    if (!keyBtn) return;
+    
+    // Öncelik: correct > present > absent
+    if (keyBtn.classList.contains("correct")) return; // Doğruysa değiştirme
+    if (keyBtn.classList.contains("present") && status === "absent") return; // Yerindeyse veya yoksa değiştirme
+    
+    keyBtn.classList.remove("absent", "present", "correct");
+    keyBtn.classList.add(status);
+}
+
 // Tahmin gönderme fonksiyonu (değişiklik yok)
 function submitGuess() {
     if (!targetWord || guessInput.disabled) return; // Oyun başlamadıysa bir şey yapma
@@ -117,6 +184,7 @@ function submitGuess() {
             letterDiv.classList.add("correct");
             result.push("correct");
             letterCount[letter]--;
+            updateKeyboardColor(letter, "correct");
         } else {
             result.push(null);
         }
@@ -131,8 +199,10 @@ function submitGuess() {
             if (targetWord.includes(letter) && letterCount[letter] > 0) {
                 letterDiv.classList.add("present");
                 letterCount[letter]--;
+                updateKeyboardColor(letter, "present");
             } else {
                 letterDiv.classList.add("absent");
+                updateKeyboardColor(letter, "absent");
             }
         }
     }
@@ -162,6 +232,7 @@ function resetGame() {
 // Sayfa ilk yüklendiğinde varsayılan zorlukla (Orta - 5 Harf) oyunu başlat
 // ve "Enter" tuşunu dinle
 document.addEventListener('DOMContentLoaded', () => {
+    createKeyboard();
     initializeGame(5);
 
     if (guessInput) {

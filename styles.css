@@ -15,7 +15,8 @@
     /* Game Colors */
     --game-correct: #10b981;
     --game-present: #eab308;
-    --game-absent: #334155;
+    --game-absent: #0f172a;
+    /* was #334155 (gray), now much darker (black-ish) */
 }
 
 * {
@@ -653,6 +654,71 @@ footer {
     font-size: 0.85rem;
     border-top: 1px solid var(--border-color);
     margin-top: auto;
+}
+
+/* Keyboard */
+.keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 2rem;
+    align-items: center;
+    width: 100%;
+}
+
+.keyboard-row {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    width: 100%;
+}
+
+.key {
+    background: #475569;
+    /* was var(--bg-surface-hover) (dark), now gray */
+    color: var(--text-primary);
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 12px 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    user-select: none;
+    min-width: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Outfit', sans-serif;
+}
+
+.key.wide {
+    font-size: 0.9rem;
+    padding: 12px 14px;
+}
+
+.key:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.key:active {
+    transform: scale(0.95);
+}
+
+.key.correct {
+    background-color: var(--game-correct);
+    color: white;
+}
+
+.key.present {
+    background-color: var(--game-present);
+    color: white;
+}
+
+.key.absent {
+    background-color: var(--game-absent);
+    color: white;
 }
 
 /* Responsive */

@@ -45,11 +45,15 @@
             
             <div id="word-length"></div>
             <div id="game"></div>
-<p id="game-message" class="game-message"></p> <div class="input-container">
-    <input type="text" id="guess" maxlength="5" placeholder="Tahmininizi girin">
+<p id="game-message" class="game-message"></p> 
+            <div class="input-container">
+                <input type="text" id="guess" maxlength="5" placeholder="Tahmininizi girin">
                 <button onclick="submitGuess()">Tahmin Et</button>
+            </div>
+            <div class="action-buttons" style="margin-top: 1rem; margin-bottom: 1rem;">
                 <button onclick="resetGame()">Yeni İsim</button>
             </div>
+            <div id="keyboard" class="keyboard"></div>
         </section>
     </main>
     <footer>
